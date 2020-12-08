@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Vacina {
-
+		
 	DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+	
 	private int idVacina;
 	private String paisOrigem;
 	private int estagioPesquisa;
 	private LocalDate dataInicioPesquisa;
-	private Pesquisador pesquisador;
-
-	public Vacina(int idVacina, String paisOrigem, int estagioPesquisa, LocalDate dataInicioPesquisa,
-			Pesquisador pesquisador) {
+	private String pesquisador;
+	
+	public Vacina(int idVacina, String paisOrigem, int estagioPesquisa,
+			LocalDate dataInicioPesquisa, String pesquisador) {
 		super();
 		this.idVacina = idVacina;
 		this.paisOrigem = paisOrigem;
@@ -25,7 +25,7 @@ public class Vacina {
 
 	public Vacina() {
 		super();
-
+		
 	}
 
 	public int getIdVacina() {
@@ -60,12 +60,13 @@ public class Vacina {
 		this.dataInicioPesquisa = dataInicioPesquisa;
 	}
 
-	public Pesquisador getPesquisador() {
+	public String getPesquisador() {
 		return pesquisador;
 	}
 
-	public void setPesquisador(Pesquisador pesquisador) {
+	public void setPesquisador(String pesquisador) {
 		this.pesquisador = pesquisador;
 	}
 
+	
 }

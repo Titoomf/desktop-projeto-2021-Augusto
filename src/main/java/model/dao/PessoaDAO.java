@@ -33,9 +33,7 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 			query.setString(4, pessoa.getCpf());
 			query.setDate(5, dataVacinacaoConvertidaParaSQL);
 			query.setBoolean(6, pessoa.isVoluntario());
-
-			// Conversão de LocalDate (da entidade Pessoa) para sql.Date (para salvar no
-			// banco)
+			query.setDate(7, dataNascimentoConvertidaParaSQL);
 
 			int codigoRetorno = query.executeUpdate();
 			if (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
@@ -64,7 +62,7 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query de Exclusão do PESSOA.");
+			System.out.println("Erro ao executar a Query de Exclusï¿½o do PESSOA.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(stmt);
@@ -137,7 +135,7 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 	}
 
 	@Override
-	public  List<Pessoa> pesquisarTodos() {
+	public List<Pessoa> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
 		String sql = "SQL * FROM PESSOA ";
 
@@ -192,15 +190,13 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 		pessoa.setCpf(conjuntoResultante.getString("cpf"));
 		Date dataVacinacaoSQL = (conjuntoResultante.getDate("Data_Vacinacao"));
 
-		// Converte a data oriunda do banco para LocalDate e preenche no VO
-
 		LocalDate dataNascimento = dataSQL.toLocalDate();
 		pessoa.setDataNascimento(dataNascimento);
 		pessoa.setDataNascimento(dataSQL.toLocalDate());
 
 		LocalDate dataVacinacao = dataVacinacaoSQL.toLocalDate();
 		pessoa.setDataVacinacao(dataVacinacao);
-		
+
 		return pessoa;
 	}
 }
